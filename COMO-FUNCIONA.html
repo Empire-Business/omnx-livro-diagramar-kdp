@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Livro para KDP · Como funciona</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: coluna única de leitura (máx. 1040px); a linha do tempo do método é o centro do infográfico. */
+:root {
+  --bg: #F3F6F5;
+  --surface: #FFFFFF;
+  --ink: #14201D;
+  --muted: #56645F;
+  --line: #D6DFDB;
+  --accent: #475569;
+  --accent-ink: #FFFFFF;
+  --approve: #F4C54E;          /* marcador "você aprova" */
+  --approve-ink: #3D2F00;
+  --approve-mark: #7A5A00;     /* ícone sobre o fundo amarelado */
+  --accent-soft: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  --accent-line: color-mix(in srgb, var(--accent) 35%, var(--line));
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1412; --surface: #16201C; --ink: #E5ECE9; --muted: #9BAAA5; --line: #283530;
+    --accent: #A8B4C6; --accent-ink: #0F1722; --approve: #E8BB45; --approve-ink: #2B2000; --approve-mark: #F3D27A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1412; --surface: #16201C; --ink: #E5ECE9; --muted: #9BAAA5; --line: #283530;
+  --accent: #A8B4C6; --accent-ink: #0F1722; --approve: #E8BB45; --approve-ink: #2B2000; --approve-mark: #F3D27A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.6 var(--f-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 56px; display: grid; gap: 64px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.12; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 3.6vw, 2.2rem); font-weight: 800; letter-spacing: -0.01em; }
+h3 { font-size: 1.18rem; font-weight: 600; }
+p { margin: 0; max-width: 65ch; }
+code, .mono { font-family: var(--f-mono); font-size: 0.86em; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+.eyebrow { font: 600 0.78rem/1 var(--f-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.lead { font-size: 1.15rem; color: var(--muted); }
+section { display: grid; gap: 22px; }
+.section-head { display: grid; gap: 10px; }
+
+/* ---------- Topo ---------- */
+.hero { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
+.avatar { width: 148px; height: 148px; border-radius: 50%; object-fit: cover; border: 4px solid var(--surface);
+  box-shadow: 0 0 0 2px var(--accent-line); background: var(--accent-soft); }
+.hero-text { display: grid; gap: 12px; min-width: 0; }
+.role { font: 600 1rem/1.3 var(--f-body); color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 0.86rem; padding: 4px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--ink);
+  border: 1px solid var(--accent-line); }
+@media (max-width: 620px) { .hero { grid-template-columns: 1fr; } .avatar { width: 112px; height: 112px; } }
+
+/* ---------- Entrada → agente → saída ---------- */
+.io { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 14px; align-items: stretch; }
+.io-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.io-box.mid { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.io-box.mid .eyebrow { color: var(--accent-ink); opacity: .8; }
+.io-box ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+.io-arrow { align-self: center; color: var(--accent); }
+.io-arrow svg { display: block; width: 28px; height: 28px; }
+@media (max-width: 820px) { .io { grid-template-columns: 1fr; } .io-arrow { justify-self: center; transform: rotate(90deg); } }
+
+/* ---------- Como começar ---------- */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; counter-reset: s; }
+.steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.steps li::before { content: counter(s); font: 800 1.5rem/1 var(--f-display); color: var(--accent);
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--accent-soft); }
+.say { font-size: 0.95rem; padding: 10px 14px; border-radius: 12px 12px 12px 4px; background: var(--accent-soft); border: 1px solid var(--accent-line); }
+.say b { display: block; font: 600 0.72rem/1.4 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.say.agent { border-radius: 12px 12px 4px 12px; background: var(--surface); border-color: var(--line); }
+
+/* ---------- Linha do tempo do método ---------- */
+.legend { display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.9rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.dot.ap { background: var(--approve); box-shadow: 0 0 0 2px var(--approve-ink) inset; }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; position: relative; }
+.timeline > li { display: grid; grid-template-columns: 56px 1fr; gap: 18px; position: relative; padding-bottom: 26px; }
+.timeline > li::after { content: ""; position: absolute; left: 27px; top: 50px; bottom: 0; width: 2px; background: var(--accent-line); }
+.timeline > li:last-child::after { display: none; }
+.node { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink);
+  font: 800 1.35rem/1 var(--f-display); position: relative; z-index: 1; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px 22px; display: grid; gap: 12px; min-width: 0; }
+.card-top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; justify-content: space-between; }
+.who { font: 600 0.8rem/1.4 var(--f-mono); color: var(--muted); }
+.out { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; }
+.out-label { font: 600 0.72rem/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.file { font-family: var(--f-mono); font-size: 0.82rem; padding: 3px 10px; border-radius: 8px; background: var(--bg); border: 1px dashed var(--line); overflow-wrap: anywhere; }
+.approve { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; padding: 10px 14px; border-radius: 10px;
+  background: color-mix(in srgb, var(--approve) 28%, var(--surface)); border: 1px solid var(--approve); font-size: 0.95rem; }
+.approve svg { width: 20px; height: 20px; margin-top: 2px; color: var(--approve-mark); }
+.timeline > li.gate .node { background: var(--approve); color: var(--approve-ink); }
+
+/* ---------- Pasta ---------- */
+.tree-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.tree { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; font: 0.88rem/1.75 var(--f-mono); overflow-x: auto; white-space: pre; }
+.tree .c { color: var(--muted); }
+.tree .k { color: var(--accent); font-weight: 600; }
+.notes { display: grid; gap: 12px; }
+.note { padding: 14px 16px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: 0 10px 10px 0; font-size: 0.95rem; }
+@media (max-width: 820px) { .tree-wrap { grid-template-columns: 1fr; } }
+
+/* ---------- Peça assim ---------- */
+.asks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.ask { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; display: grid; gap: 10px; align-content: space-between; min-width: 0; }
+.ask q { font-size: 1.02rem; quotes: "“" "”"; }
+.copy { justify-self: start; font: 600 0.8rem/1 var(--f-body); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--accent-line); background: var(--accent-soft); color: var(--ink); cursor: pointer; }
+.copy:hover { border-color: var(--accent); }
+
+/* ---------- Limites ---------- */
+.limits { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.limits .card { align-content: start; }
+.limits .card ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+
+/* ---------- Perguntas ---------- */
+.faq { display: grid; gap: 10px; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px 18px; }
+.faq summary { cursor: pointer; font-weight: 700; padding: 12px 0; list-style-position: outside; }
+.faq details p { padding-bottom: 14px; color: var(--ink); }
+
+footer { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 0.88rem; display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
+@media (prefers-reduced-motion: no-preference) { .copy { transition: border-color .15s; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero"><div class="avatar" role="img" aria-label="Livro para KDP" style="display:grid;place-items:center;font:800 3.4rem/1 var(--f-display);color:var(--accent)">O</div><div class="hero-text"><span class="eyebrow">Skill · livro impresso</span><h1>Livro para KDP</h1><p class="role">Transforma os capítulos do seu livro no PDF do miolo para imprimir na Amazon KDP.</p><div class="chips"><span class="chip">Margens pelas regras oficiais</span><span class="chip">Sumário e numeração</span><span class="chip">16 formatos da KDP</span><span class="chip">Conferência do PDF</span></div></div></header>
+<section aria-labelledby="t-faz"><div class="section-head"><span class="eyebrow">Em uma olhada</span><h2 id="t-faz">Você traz os capítulos. Ela devolve o miolo em PDF.</h2></div><div class="io"><div class="io-box"><span class="eyebrow">Você traz</span><ul><li>Capítulos em Markdown (um arquivo por capítulo)</li><li>Título e nome do autor</li><li>Formato e cor do papel</li></ul></div><div class="io-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="io-box mid"><span class="eyebrow">A skill faz</span><ul><li>Conta as páginas de verdade</li><li>Aplica a margem certa</li><li>Confere o PDF nas regras da KDP</li></ul></div><div class="io-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="io-box"><span class="eyebrow">Você recebe</span><ul><li>PDF do miolo</li><li>Margens e páginas usadas</li><li>Lista do que ainda precisa olhar</li></ul></div></div></section>
+<section aria-labelledby="t-comecar"><div class="section-head"><span class="eyebrow">Como começar</span><h2 id="t-comecar">Quatro passos, nenhum comando</h2><p class="lead">Tudo acontece conversando com o Claude Code no seu computador.</p></div><ol class="steps"><li><h3>Instale</h3><div class="say"><b>Você diz</b>Instale a skill omnx-livro-diagramar-kdp a partir desta pasta.</div><p>A IA copia tudo para o lugar certo.</p></li><li><h3>Abra uma conversa nova</h3><p>Feche e abra de novo, para a skill aparecer.</p></li><li><h3>Peça o livro</h3><div class="say"><b>Você diz</b>Diagrama meu livro para a Amazon. Os capítulos estão nesta pasta.</div></li><li><h3>Confira o plano</h3><p>Ela pergunta o que falta e mostra formato, papel e fonte antes de gerar.</p></li></ol></section>
+<section aria-labelledby="t-metodo"><div class="section-head"><span class="eyebrow">O método</span><h2 id="t-metodo">Dos capítulos ao PDF do miolo</h2><div class="legend"><span><i class="dot"></i>A skill trabalha</span><span><i class="dot ap"></i>Você aprova antes de seguir</span></div></div><ol class="timeline"><li><div class="node">1</div><div class="card"><div class="card-top"><h3>Coleta</h3><span class="who">A skill</span></div><p>Pasta dos capítulos, título, nome do autor como aparece na KDP, formato e papel. Uma pergunta por vez.</p></div></li><li class="gate"><div class="node">2</div><div class="card"><div class="card-top"><h3>Plano</h3><span class="who">A skill</span></div><p>Ela mostra as escolhas: formato, papel, fonte e tamanho da letra.</p><div class="approve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Você dá o “pode gerar”.</span></div></div></li><li><div class="node">3</div><div class="card"><div class="card-top"><h3>Diagramação</h3><span class="who">A skill</span></div><p>Ela monta folha de rosto, página de direitos, sumário e capítulos em página ímpar. Conta as páginas de verdade e, se o livro mudar de faixa, refaz com a margem certa.</p><div class="out"><span class="out-label">Sai daqui</span><span class="file">miolo em PDF</span></div></div></li><li><div class="node">4</div><div class="card"><div class="card-top"><h3>Conferência</h3><span class="who">A skill</span></div><p>Um programa confere tamanho da página, número de páginas, fontes embutidas, margens do texto e páginas em branco.</p><div class="out"><span class="out-label">Sai daqui</span><span class="file">relatório</span></div></div></li><li class="gate"><div class="node">5</div><div class="card"><div class="card-top"><h3>Você envia</h3><span class="who">Você</span></div><p>Você abre o PDF e envia na sua conta da KDP.</p><div class="approve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>A palavra final é do Previewer, a pré-visualização da KDP, no envio do livro.</span></div></div></li></ol></section>
+<section aria-labelledby="t-pasta"><div class="section-head"><span class="eyebrow">No seu computador</span><h2 id="t-pasta">O PDF fica na pasta que você escolher</h2></div><div class="tree-wrap"><pre class="tree" aria-label="Arquivos criados"><span class="k">pasta-do-livro/</span>
+├─ <span class="k">capitulos/</span>
+│  ├─ pre-dedicatoria.md  <span class="c">antes do sumário</span>
+│  ├─ 01-comeco.md
+│  └─ 02-meio.md
+└─ <span class="k">saida/</span>
+   └─ meu-livro-miolo-6x9.pdf</pre><div class="notes"><p class="note">Nunca sobrescreve: uma nova versão vira -v2, -v3.</p><p class="note">Capítulos ficam na sua pasta, sem alteração.</p><p class="note">Margens em polegadas, como a KDP pede.</p></div></div></section>
+<section aria-labelledby="t-peca"><div class="section-head"><span class="eyebrow">Exemplos</span><h2 id="t-peca">Peça assim</h2></div><div class="asks"><div class="ask"><q>Diagrama meu livro para a Amazon KDP.</q><button class="copy" type="button">Copiar</button></div><div class="ask"><q>Gera o PDF do miolo em 6x9, papel creme.</q><button class="copy" type="button">Copiar</button></div><div class="ask"><q>Confere se este PDF passa nas regras da KDP.</q><button class="copy" type="button">Copiar</button></div><div class="ask"><q>Calcula as margens do KDP para um livro de 320 páginas.</q><button class="copy" type="button">Copiar</button></div></div></section>
+<section aria-labelledby="t-limites"><div class="section-head"><span class="eyebrow">Combinado é combinado</span><h2 id="t-limites">O que ela não faz</h2></div><div class="limits"><div class="card"><h3>Fora do escopo</h3><ul><li>Capa do livro</li><li>E-book que se ajusta à tela</li><li>Capa dura e imagens que vão até a borda</li><li>Escrever ou mudar o texto</li></ul></div><div class="card"><h3>Fica com você</h3><ul><li>Cadastrar e enviar o livro na KDP</li><li>Revisar a página de direitos autorais</li><li>Garantir a licença comercial da fonte</li></ul></div><div class="card"><h3>O que ela não mede</h3><ul><li>Imagens: margem e resolução de 300 DPI</li><li>PDF/X, formato preferido da KDP: sai PDF comum</li><li>Se o Previewer reclamar, é ele quem manda</li></ul></div></div></section>
+<section aria-labelledby="t-faq"><div class="section-head"><span class="eyebrow">Dúvidas comuns</span><h2 id="t-faq">Perguntas frequentes</h2></div><div class="faq"><details><summary>As regras são as oficiais da Amazon?</summary><p>Sim. As margens, a fonte mínima e os limites de páginas foram conferidos nas páginas de ajuda da KDP em 08/11/2026. Os endereços ficam em references/regras-kdp.md.</p></details><details><summary>Qual o tamanho mínimo da letra?</summary><p>A KDP aceita a partir de 7 pontos. A skill usa 11 por padrão, para facilitar a leitura.</p></details><details><summary>Preciso instalar algo?</summary><p>O Python e um navegador Chrome, Edge ou Chromium. Para medir as margens, também o Poppler. A IA instala, se faltar, com o seu aceite.</p></details><details><summary>Funciona no Windows?</summary><p>Sim, com os mesmos programas. A instalação é copiar a pasta, e a IA faz isso se você pedir.</p></details></div></section>
+<footer><span>Guia de Livro para KDP · versão 1.0</span><span>Atualizado em 08/11/2026</span></footer>
+</main>
+<script>
+document.querySelectorAll('.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var q = b.parentElement.querySelector('q'); var t = q ? q.textContent.trim() : '';
+    var done = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done, function () { selectText(q); });
+    } else { selectText(q); }
+  });
+});
+function selectText(el) { if (!el) return; var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+</script>
+</body>
+</html>
